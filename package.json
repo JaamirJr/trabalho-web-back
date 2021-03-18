@@ -1,0 +1,22 @@
+{
+  "name": "trabalho-web-back",
+  "version": "1.0.0",
+  "description": "Backend do trabalho final de Desenvolvimento Web",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaamirJr/trabalho-web-back.git"
+  },
+  "author": "jamir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JaamirJr/trabalho-web-back/issues"
+  },
+  "homepage": "https://github.com/JaamirJr/trabalho-web-back#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
