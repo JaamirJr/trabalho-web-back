@@ -59,7 +59,7 @@ router.post('/turmas', (req, res) => {
         data_inicio : req.body.data_inicio,
         alunos : req.body.alunos
     }
-    turmaModel.insertMany(dados, (erro, resultado) => {
+    turmaModel.insertMany(dados, async (erro, resultado) => {
         if(erro){
             resposta.status = 'Erro',
             resposta.dados = erro,
@@ -69,6 +69,7 @@ router.post('/turmas', (req, res) => {
             resposta.status = 'OK',
             resposta.dados = resultado,
             resposta.mensagem = 'Sucesso ao inserir turma',
+            resposta.turmas = await turmaModel.find();
             res.send(resposta)
         }
     })
@@ -77,7 +78,7 @@ router.post('/turmas', (req, res) => {
 router.delete('/turmas/:id', (req, res) => {
     var resposta = {}
     var id = req.params.id
-    turmaModel.deleteOne({_id : id}, (erro, resultado) => {
+    turmaModel.deleteOne({_id : id}, async (erro, resultado) => {
         if(erro){
             resposta.status = 'Erro',
             resposta.dados = erro,
@@ -87,6 +88,7 @@ router.delete('/turmas/:id', (req, res) => {
             resposta.status = 'OK',
             resposta.dados = resultado,
             resposta.mensagem = 'Sucesso ao deletar turma',
+            resposta.turmas = await turmaModel.find()
             res.send(resposta)
         }
     })
@@ -101,7 +103,7 @@ router.patch('/turmas/:id', (req, res) => {
         data_inicio : req.body.data_inicio,
         alunos : req.body.alunos
     }
-    turmaModel.updateMany({_id : id}, dados, (req, res) => {
+    turmaModel.updateMany({_id : id}, dados, async (erro, resultado) => {
         if(erro){
             resposta.status = 'Erro',
             resposta.dados = erro,
@@ -111,6 +113,7 @@ router.patch('/turmas/:id', (req, res) => {
             resposta.status = 'OK',
             resposta.dados = resultado,
             resposta.mensagem = 'Sucesso ao deletar turma',
+            resposta.turmas = await turmaModel.find()
             res.send(resposta)
         }
     })

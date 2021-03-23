@@ -16,7 +16,7 @@ router.get('/alunos', (req, res) => {
             resposta.status = 'Erro',
             resposta.dados = erro,
             resposta.mensagem = 'Erro ao capturar alunos',
-            res.send(resposta)
+            res.status(400).send(resposta)
         } else {
             resposta.status = 'OK',
             resposta.dados = resultado,
@@ -51,7 +51,7 @@ router.post('/alunos', (req, res) => {
         nome_aluno : req.body.nome_aluno,
         data_matricula : data
     }
-    alunoModel.insertMany(dados, (erro, resultado) =>{
+    alunoModel.insertMany(dados, async (erro, resultado) =>{
         if(erro){
             resposta.status = 'Erro',
             resposta.dados = erro,
@@ -61,6 +61,7 @@ router.post('/alunos', (req, res) => {
             resposta.status = 'OK',
             resposta.dados = resultado,
             resposta.mensagem = 'Sucesso ao inserir aluno',
+            resposta.alunos = await alunoModel.find();
             res.send(resposta)
         }
     })
@@ -69,7 +70,7 @@ router.post('/alunos', (req, res) => {
 router.delete('/alunos/:id', (req, res) => {
     var resposta = {}
     var id = req.params.id
-    alunoModel.deleteOne({_id : id}, (erro, resultado) => {
+    alunoModel.deleteOne({_id : id}, async (erro, resultado) => {
         if(erro){
             resposta.status = 'erro',
             resposta.dados = erro,
@@ -79,6 +80,7 @@ router.delete('/alunos/:id', (req, res) => {
             resposta.status = 'OK',
             resposta.dados = resultado,
             resposta.mensagem = 'Sucesso ao deletar aluno',
+            resposta.alunos = await alunoModel.find();
             res.send(resposta)
         }
     })
@@ -86,11 +88,12 @@ router.delete('/alunos/:id', (req, res) => {
 
 router.patch('/alunos/:id', (req, res) => {
     var resposta = {}
+    var id = req.params.id
     var dados = {
         nome_aluno : req.body.nome_aluno,
         data_matricula : req.body.data_matricula
     }
-    alunoModel.updateOne({_id : id}, dados, (erro, resultado) =>{
+    alunoModel.updateOne({_id : id}, dados, async (erro, resultado) =>{
         if(erro){
             resposta.status = 'erro',
             resposta.dados = erro,
@@ -100,6 +103,7 @@ router.patch('/alunos/:id', (req, res) => {
             resposta.status = 'OK',
             resposta.dados = resultado,
             resposta.mensagem = 'Sucesso ao atualizar aluno',
+            resposta.alunos = await alunoModel.find();
             res.send(resposta)
         }
     })
