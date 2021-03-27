@@ -213,12 +213,12 @@ router.patch('/turmas/:id', (req, res) => {
         if(erro){
             resposta.status = 'Erro',
             resposta.dados = erro,
-            resposta.mensagem = 'Erro ao deletar turma',
+            resposta.mensagem = 'Erro ao atualizar turma',
             res.send(resposta)
         } else {
             resposta.status = 'OK',
             resposta.dados = resultado,
-            resposta.mensagem = 'Sucesso ao deletar turma',
+            resposta.mensagem = 'Sucesso ao atualizar turma',
             resposta.turmas = await turmaModel.find()
             res.send(resposta)
         }
