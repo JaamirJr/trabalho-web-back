@@ -5,7 +5,7 @@ const port = 3001
 const routes = require('./routes')
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'https://trabalho-web-ee42c.web.app/',
     optionSuccessStatus: 200
 }
 
