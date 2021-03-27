@@ -4,12 +4,7 @@ const app = express()
 const port = 3001
 const routes = require('./routes')
 
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    optionSuccessStatus: 200
-}
-
-app.use(cors(corsOptions))
+app.use(cors())
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
